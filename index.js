@@ -1,9 +1,11 @@
+require("dotenv").config();
 const { Keystone } = require('@keystonejs/keystone');
 const { GraphQLApp } = require('@keystonejs/app-graphql');
 const { AdminUIApp } = require('@keystonejs/app-admin-ui');
 const { MongooseAdapter: Adapter } = require('@keystonejs/adapter-mongoose');
+const { NextApp } = require('@keystonejs/app-next');
 const PROJECT_NAME = 'theOldSchool';
-const adapterConfig = { mongoUri: 'mongodb://localhost/the-old-school' };
+const adapterConfig = { mongoUri: process.env.MONGODB_ATLAS_URI };
 
 
 /**
@@ -18,5 +20,9 @@ const keystone = new Keystone({
 
 module.exports = {
   keystone,
-  apps: [new GraphQLApp(), new AdminUIApp({ name: PROJECT_NAME, enableDefaultRoute: true })],
+  apps: [
+    new GraphQLApp(), 
+    new AdminUIApp({ name: PROJECT_NAME, enableDefaultRoute: false }),
+    new NextApp({ dir: 'app' }),
+  ],
 };
