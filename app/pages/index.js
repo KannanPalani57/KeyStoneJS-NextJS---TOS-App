@@ -1,7 +1,7 @@
 import client from "../apolloClient";
 import { gql } from "@apollo/client";
 import Link from "next/link"
-
+// import Image from "next/image"
 
 export default function Index(props){
     return (
@@ -19,6 +19,7 @@ export default function Index(props){
                         )
                })
            }
+           {/* <Image src="/introToGit.jpg" alt="me" width="200" height="200"></Image> */}
         </div>
     )
 }

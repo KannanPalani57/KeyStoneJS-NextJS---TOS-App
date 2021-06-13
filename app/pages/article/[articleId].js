@@ -2,10 +2,18 @@ import { useRouter } from 'next/router';
 import { gql } from "@apollo/client";
 import client from "../../apolloClient";
 import markdownToHtml from "../../lib/markdownToHtml";
+import Image from "next/image"
+import { keys } from "../../lib/keys"
 
-export default function Article({title, content}){
+export default function Article({title, content, coverImageName, authorName}){
+    const myLoader=({src})=>{
+        return `${keys.url}/images/${coverImageName}`;
+      }
+      
     return (
         <div>
+            <Image loader={myLoader} src={`${keys.url}/images/${coverImageName}`} alt="me" width="800" height="200"></Image>
+            <h3>Written by, {authorName && authorName}</h3>
             <h2>{title}</h2>
             <div dangerouslySetInnerHTML={{ __html: content }}>
             </div>
@@ -19,8 +27,14 @@ export async function getStaticProps({ params }){
         query: gql`
             query getOnePost($id: ID!){
                 Post(where: {id: $id}){
-                title
-                body
+                    author{
+                        name
+                    }
+                    title
+                    body
+                    coverImage{
+                        filename
+                    }
                 }
             }
         `,
@@ -30,9 +44,11 @@ export async function getStaticProps({ params }){
     const content = await markdownToHtml(data.Post.body)
     return {
         props: {
+            authorName: data.Post.author.name,
             title,
-            content
-        }
+            content,
+            coverImageName: data.Post.coverImage.filename 
+        }, 
     }
 }
 
