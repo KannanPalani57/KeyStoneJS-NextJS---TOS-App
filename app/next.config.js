@@ -6,7 +6,10 @@ module.exports ={
             fs: 'empty', // This is required
         }
         return config
-    }
+    },
+    images: {
+      domains: ['localhost'],
+    },
 } 
 // withMDX: withMDX({
 //     pageExtensions: ['js', 'jsx', 'mdx']

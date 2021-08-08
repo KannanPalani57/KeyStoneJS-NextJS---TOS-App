@@ -1,4 +1,4 @@
-const { Text, Select, Relationship, File } = require("@keystonejs/fields")
+const { Text, Select, Relationship, File, DateTime } = require("@keystonejs/fields")
 const { Markdown } = require('@keystonejs/fields-markdown');
 const { LocalFileAdapter } = require('@keystonejs/file-adapters');
 
@@ -41,6 +41,9 @@ const postFields = {
             ref: "User",
             many: false,
             isRequired: true,
+        },
+        createdAt: {
+            type: DateTime,
         }
     },
     hooks: {

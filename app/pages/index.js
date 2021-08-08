@@ -1,25 +1,31 @@
 import client from "../apolloClient";
 import { gql } from "@apollo/client";
 import Link from "next/link"
-// import Image from "next/image"
+import styled from "styled-components"
+import MainContent from "../components/MainContent"
+import RecentArticles from "../components/RecentArticles"
+import Image from "next/image"
+import { keys } from "../lib/keys"
+
+const PublishedText = styled.h2`
+    font-size: 1.4rem;
+    margin: 0 14%;
+    font-weight: bold;
+    width: 22%;
+    border-bottom: 4px solid #355e3b; 
+`
+
 
 export default function Index(props){
     return (
         <div>
-           <h2>Articles We have right now :)</h2>
+        <MainContent />
+           <PublishedText>Recently Published Articles</PublishedText>
            {
-               props.articles.map(item => {
-                   return (
-                            <div key={item.id}>
-                                <h3>{item.title}</h3>
-                                <Link href={`article/${item.id}`}>  
-                                    <a href={`article/${item.id}`}>Read the Article</a>
-                                </Link>    
-                            </div>
-                        )
+               props?.articles?.map(item => {
+                   return <RecentArticles article={item}/>
                })
            }
-           {/* <Image src="/introToGit.jpg" alt="me" width="200" height="200"></Image> */}
         </div>
     )
 }
@@ -32,6 +38,9 @@ export async function getStaticProps() {
                     id
                     title
                     body
+                    coverImage{
+                        filename
+                    }
                 }
             }
         `,    

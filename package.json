@@ -18,6 +18,9 @@
   },
   "dependencies": {
     "@apollo/client": "^3.3.16",
+    "@chakra-ui/react": "^1.6.4",
+    "@emotion/react": "^11.4.0",
+    "@emotion/styled": "^11.3.0",
     "@keystonejs/adapter-mongoose": "^11.2.1",
     "@keystonejs/app-admin-ui": "^7.5.1",
     "@keystonejs/app-graphql": "^6.3.1",
@@ -33,6 +36,8 @@
     "babel-plugin-styled-components": "^1.12.0",
     "cross-env": "^7.0.3",
     "dotenv": "^8.2.0",
+    "emotion-theming": "^11.0.0",
+    "framer-motion": "^4.1.17",
     "graphql": "^15.5.0",
     "next": "^10.2.0",
     "react": "^17.0.2",
@@ -40,5 +45,10 @@
     "remark": "^13.0.0",
     "remark-html": "^13.0.1",
     "styled-components": "^5.2.3"
+  },
+  "devDependencies": {
+    "autoprefixer": "^10.2.6",
+    "postcss": "^8.3.5",
+    "tailwindcss": "^2.2.4"
   }
 }
